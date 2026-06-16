@@ -1531,10 +1531,6 @@ ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
   .sidebar-overlay.visible { display: block; }
 }
 
-/* ========== GRADIENT ACCENT VARS ========== */
---grad-purple: linear-gradient(135deg, #8b5cf6 0%, #4a90d9 100%);
---grad-green: linear-gradient(135deg, #4ecb71 0%, #4a90d9 100%);
-
 .gradient-text-gold {
   background: var(--grad-gold);
   -webkit-background-clip: text;
