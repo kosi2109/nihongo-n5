@@ -120,7 +120,7 @@ export default function VocabStudy({ lesson }) {
       </div>
 
       {/* Progress */}
-      <ProgressBar cards={originalCards} type="vocab" label="ဝေါဟာရ တိုးတက်မှု" />
+      <ProgressBar lesson={lesson} type="vocab" label="ဝေါဟာရ တိုးတက်မှု" />
 
       {/* Study Area */}
       <div className="study-area">

@@ -1601,11 +1601,11 @@ ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
   .progress-label { font-size: 0.65rem !important; margin-bottom: 2px !important; }
   .progress-pct   { font-size: 0.65rem !important; }
 
-  /* === Study area: fill remaining height, no scroll === */
+  /* === Study area: fill remaining height, scrollable === */
   .study-area {
     flex: 1;
     min-height: 0;
-    overflow: hidden;
+    overflow-y: auto;
     padding: 8px 12px !important;
     display: flex;
     flex-direction: column;

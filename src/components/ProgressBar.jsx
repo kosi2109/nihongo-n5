@@ -1,8 +1,8 @@
 import { useProgress } from '../hooks/useProgress';
 
-export default function ProgressBar({ cards, type = 'vocab', label }) {
+export default function ProgressBar({ lesson, type = 'vocab', label }) {
   const { getLessonProgress } = useProgress();
-  const { learned, total, percent } = getLessonProgress(cards, type);
+  const { learned, total, percent } = getLessonProgress(lesson, type);
 
   return (
     <div className="progress-section">
