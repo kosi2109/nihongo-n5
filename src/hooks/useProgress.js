@@ -3,28 +3,64 @@ import { metadata } from '../data/metadata';
 
 const STORAGE_KEY = 'n5_progress';
 
+// ----------------------------------------------------------------------------
+// Global state implementation to ensure all components share the same progress
+// and trigger re-renders instantly when any component updates it.
+// ----------------------------------------------------------------------------
+
+let globalProgress = {};
+try {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    globalProgress = JSON.parse(saved);
+  }
+} catch (e) {
+  console.error("Failed to load progress from localStorage", e);
+}
+
+const listeners = new Set();
+
+function setGlobalProgress(updater) {
+  if (typeof updater === 'function') {
+    globalProgress = updater(globalProgress);
+  } else {
+    globalProgress = updater;
+  }
+  
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(globalProgress));
+  } catch (e) {
+    console.error("Failed to save progress to localStorage", e);
+  }
+  
+  // Notify all components using this hook to re-render
+  listeners.forEach(listener => listener(globalProgress));
+}
+
+// ----------------------------------------------------------------------------
+// The hook
+// ----------------------------------------------------------------------------
+
 export function useProgress() {
-  const [progress, setProgress] = useState(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : {};
-    } catch {
-      return {};
-    }
-  });
+  const [progress, setProgress] = useState(globalProgress);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-  }, [progress]);
+    // Subscribe this component to global updates
+    listeners.add(setProgress);
+    return () => {
+      // Unsubscribe on unmount
+      listeners.delete(setProgress);
+    };
+  }, []);
 
   const markLearned = (cardId, type = 'vocab') => {
     const key = `${type}_${cardId}`;
-    setProgress(prev => ({ ...prev, [key]: true }));
+    setGlobalProgress(prev => ({ ...prev, [key]: true }));
   };
 
   const markUnlearned = (cardId, type = 'vocab') => {
     const key = `${type}_${cardId}`;
-    setProgress(prev => {
+    setGlobalProgress(prev => {
       const next = { ...prev };
       delete next[key];
       return next;
@@ -33,7 +69,7 @@ export function useProgress() {
 
   const toggleLearned = (cardId, type = 'vocab') => {
     const key = `${type}_${cardId}`;
-    if (progress[key]) {
+    if (globalProgress[key]) {
       markUnlearned(cardId, type);
     } else {
       markLearned(cardId, type);
@@ -74,7 +110,7 @@ export function useProgress() {
   };
 
   const resetLesson = (lessonId, type = 'vocab') => {
-    setProgress(prev => {
+    setGlobalProgress(prev => {
       const next = { ...prev };
       if (type === 'any' || type === 'vocab') {
         (metadata[lessonId]?.vocab || []).forEach(id => delete next[`vocab_${id}`]);
@@ -86,7 +122,7 @@ export function useProgress() {
     });
   };
 
-  const resetAll = () => setProgress({});
+  const resetAll = () => setGlobalProgress({});
 
   return { 
     progress, 

@@ -158,6 +158,8 @@ export default function GrammarStudy({ lesson }) {
   }
 
   const currentGrammar = grammarCards[currentIndex];
+  const cards = grammarCards;
+  const currentCard = currentGrammar;
 
   if (!grammarCards.length) {
     return (
@@ -196,7 +198,7 @@ export default function GrammarStudy({ lesson }) {
       </div>
 
       {/* Progress */}
-      <ProgressBar cards={cards} type="grammar" label="သဒ္ဒါ တိုးတက်မှု" />
+      <ProgressBar lesson={lesson} type="grammar" label="သဒ္ဒါ တိုးတက်မှု" />
 
       {/* Study Area */}
       <div className="study-area">
