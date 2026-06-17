@@ -1,0 +1,233 @@
+export const vocab = [
+  {
+    "id": 60,
+    "lesson": 4,
+    "japanese": "今",
+    "reading": "いま",
+    "romaji": "ima",
+    "burmese": "ယခု / အခုချိန်",
+    "type": "noun",
+    "example_jp": "今、何時ですか。",
+    "example_mm": "အခု ဘယ်နှစ်နာရီလဲ?"
+  },
+  {
+    "id": 61,
+    "lesson": 4,
+    "japanese": "〜時",
+    "reading": "〜じ",
+    "romaji": "~ji",
+    "burmese": "...နာရီ",
+    "type": "counter",
+    "example_jp": "3時に会いましょう。",
+    "example_mm": "3 နာရီတွင် တွေ့ကြစို့။"
+  },
+  {
+    "id": 62,
+    "lesson": 4,
+    "japanese": "〜分",
+    "reading": "〜ふん/ぷん",
+    "romaji": "~fun/pun",
+    "burmese": "...မိနစ်",
+    "type": "counter",
+    "example_jp": "10分待ってください。",
+    "example_mm": "10 မိနစ် စောင့်ပေးပါ။"
+  },
+  {
+    "id": 63,
+    "lesson": 4,
+    "japanese": "午前",
+    "reading": "ごぜん",
+    "romaji": "gozen",
+    "burmese": "မနက် / နေ့လည်မတိုင်ခင်",
+    "type": "noun",
+    "example_jp": "午前10時に起きます。",
+    "example_mm": "နံနက် 10 နာရီတွင် ထသည်။"
+  },
+  {
+    "id": 64,
+    "lesson": 4,
+    "japanese": "午後",
+    "reading": "ごご",
+    "romaji": "gogo",
+    "burmese": "နေ့လည်ပိုင်း / ညနေ",
+    "type": "noun",
+    "example_jp": "午後3時に会議があります。",
+    "example_mm": "နေ့လည် 3 နာရီတွင် အစည်းအဝေးရှိသည်။"
+  },
+  {
+    "id": 65,
+    "lesson": 4,
+    "japanese": "朝",
+    "reading": "あさ",
+    "romaji": "asa",
+    "burmese": "နံနက်",
+    "type": "noun",
+    "example_jp": "朝、ごはんを食べます。",
+    "example_mm": "နံနက် ထမင်းစားသည်။"
+  },
+  {
+    "id": 66,
+    "lesson": 4,
+    "japanese": "昼",
+    "reading": "ひる",
+    "romaji": "hiru",
+    "burmese": "နေ့လည်",
+    "type": "noun",
+    "example_jp": "昼ごはんを食べます。",
+    "example_mm": "နေ့လည်ထမင်းစားသည်။"
+  },
+  {
+    "id": 67,
+    "lesson": 4,
+    "japanese": "晩",
+    "reading": "ばん",
+    "romaji": "ban",
+    "burmese": "ညနေ / ည",
+    "type": "noun",
+    "example_jp": "晩ごはんは7時です。",
+    "example_mm": "ညစာ 7 နာရီတွင်ဖြစ်သည်။"
+  },
+  {
+    "id": 68,
+    "lesson": 4,
+    "japanese": "夜",
+    "reading": "よる",
+    "romaji": "yoru",
+    "burmese": "ည",
+    "type": "noun",
+    "example_jp": "夜、本を読みます。",
+    "example_mm": "ညတွင် စာအုပ်ဖတ်သည်။"
+  },
+  {
+    "id": 69,
+    "lesson": 4,
+    "japanese": "おととい",
+    "reading": "おととい",
+    "romaji": "ototoi",
+    "burmese": "တနေ့ကနေ့က",
+    "type": "noun",
+    "example_jp": "おとといは休みでした。",
+    "example_mm": "တနေ့ကနေ့က အားရက်ဖြစ်သည်။"
+  },
+  {
+    "id": 70,
+    "lesson": 4,
+    "japanese": "きのう",
+    "reading": "きのう",
+    "romaji": "kino",
+    "burmese": "မနေ့က",
+    "type": "noun",
+    "example_jp": "きのうは忙しかったです。",
+    "example_mm": "မနေ့က အလုပ်များသည်။"
+  },
+  {
+    "id": 71,
+    "lesson": 4,
+    "japanese": "今日",
+    "reading": "きょう",
+    "romaji": "kyo",
+    "burmese": "ဒီနေ့",
+    "type": "noun",
+    "example_jp": "今日は月曜日です。",
+    "example_mm": "ဒီနေ့ တနင်္လာနေ့ဖြစ်သည်။"
+  },
+  {
+    "id": 72,
+    "lesson": 4,
+    "japanese": "明日",
+    "reading": "あした",
+    "romaji": "ashita",
+    "burmese": "မနက်ဖြန်",
+    "type": "noun",
+    "example_jp": "明日、学校に行きます。",
+    "example_mm": "မနက်ဖြန် ကျောင်းသွားသည်။"
+  },
+  {
+    "id": 73,
+    "lesson": 4,
+    "japanese": "あさって",
+    "reading": "あさって",
+    "romaji": "asatte",
+    "burmese": "မနက်ကျော်တနေ့",
+    "type": "noun",
+    "example_jp": "あさってはテストです。",
+    "example_mm": "မနက်ကျော်တနေ့ စာမေးပွဲရှိသည်။"
+  },
+  {
+    "id": 74,
+    "lesson": 4,
+    "japanese": "今週",
+    "reading": "こんしゅう",
+    "romaji": "konshu",
+    "burmese": "ဒီအပတ်",
+    "type": "noun",
+    "example_jp": "今週は忙しいです。",
+    "example_mm": "ဒီအပတ် အလုပ်များသည်။"
+  },
+  {
+    "id": 75,
+    "lesson": 4,
+    "japanese": "来週",
+    "reading": "らいしゅう",
+    "romaji": "raishu",
+    "burmese": "နောက်အပတ်",
+    "type": "noun",
+    "example_jp": "来週、旅行します。",
+    "example_mm": "နောက်အပတ် ခရီးသွားသည်။"
+  },
+  {
+    "id": 76,
+    "lesson": 4,
+    "japanese": "先週",
+    "reading": "せんしゅう",
+    "romaji": "senshu",
+    "burmese": "အရင်အပတ်",
+    "type": "noun",
+    "example_jp": "先週、映画を見ました。",
+    "example_mm": "အရင်အပတ် ရုပ်ရှင်ကြည့်သည်။"
+  },
+  {
+    "id": 77,
+    "lesson": 4,
+    "japanese": "毎日",
+    "reading": "まいにち",
+    "romaji": "mainichi",
+    "burmese": "နေ့တိုင်း",
+    "type": "noun",
+    "example_jp": "毎日、日本語を勉強します。",
+    "example_mm": "နေ့တိုင်း ဂျပန်ဘာသာ လေ့လာသည်။"
+  },
+  {
+    "id": 78,
+    "lesson": 4,
+    "japanese": "何時",
+    "reading": "なんじ",
+    "romaji": "nanji",
+    "burmese": "ဘယ်နှစ်နာရီ",
+    "type": "question",
+    "example_jp": "今、何時ですか。",
+    "example_mm": "အခု ဘယ်နှစ်နာရီလဲ?"
+  },
+  {
+    "id": 79,
+    "lesson": 4,
+    "japanese": "〜から",
+    "reading": "〜から",
+    "romaji": "~kara",
+    "burmese": "...မှ / ...ကစ၍",
+    "type": "particle",
+    "example_jp": "9時から働きます。",
+    "example_mm": "9 နာရီမှ အလုပ်လုပ်သည်။"
+  },
+  {
+    "id": 80,
+    "lesson": 4,
+    "japanese": "〜まで",
+    "reading": "〜まで",
+    "romaji": "~made",
+    "burmese": "...အထိ",
+    "type": "particle",
+    "example_jp": "5時まで働きます。",
+    "example_mm": "5 နာရီအထိ အလုပ်လုပ်သည်။"
+  }
+];

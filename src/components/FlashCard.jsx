@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useProgress } from '../hooks/useProgress';
-import Furigana from './Furigana';
+import Furigana, { FuriganaText } from './Furigana';
+import { FURIGANA_MAP } from '../data/furiganaMap';
 
 const TYPE_LABELS = {
   noun: 'နာမ်', verb: 'ကြိယာ', 'adj-i': 'い-ဝိသေသနာ', 'adj-na': 'な-ဝိသေသနာ',
@@ -23,7 +24,7 @@ export default function FlashCard({ card, type = 'vocab' }) {
   const badgeClass = `badge badge-${card.type || 'noun'}`;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
       <div className="flashcard-scene" onClick={handleFlip}>
         <motion.div
           className="flashcard-container"
@@ -70,7 +71,9 @@ export default function FlashCard({ card, type = 'vocab' }) {
 
               {card.example_jp && (
                 <div className="flashcard-example">
-                  <div className="flashcard-example-jp">📝 {card.example_jp}</div>
+                  <div className="flashcard-example-jp">
+                    📝 <FuriganaText text={card.example_jp} furiganaMap={FURIGANA_MAP} size="small" />
+                  </div>
                   {card.example_mm && (
                     <div className="flashcard-example-mm">🇲🇲 {card.example_mm}</div>
                   )}

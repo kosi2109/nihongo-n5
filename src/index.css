@@ -689,7 +689,7 @@ ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
 .flashcard-scene {
   perspective: 1200px;
   width: 100%;
-  max-width: 580px;
+  max-width: 680px;
   margin: 0 auto;
   /* Prevent text selection on tap/click */
   user-select: none;
@@ -1022,8 +1022,6 @@ ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
 /* ========== STUDY AREA ========== */
 .study-area {
   padding: var(--space-2xl);
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 /* ========== GRAMMAR CARD ========== */
@@ -1440,60 +1438,283 @@ ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
 .animate-fade-in { animation: fadeIn var(--transition-slow) ease both; }
 .animate-fade-in-up { animation: fadeInUp var(--transition-slow) ease both; }
 
-/* ========== MOBILE ========== */
+/* ========== MOBILE — NO SCROLL, FULL VIEWPORT ========== */
 @media (max-width: 768px) {
   :root { --sidebar-width: 0px; }
 
+  /* === Full-height app layout === */
+  html, body, #root {
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .app-layout {
+    height: 100dvh;
+    overflow: hidden;
+    flex-direction: column;
+  }
+
+  .app-content {
+    margin-left: 0;
+    flex: 1;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* === Sidebar drawer === */
   .app-sidebar {
     transform: translateX(-100%);
     transition: transform var(--transition-base);
   }
-
   .app-sidebar.open { transform: translateX(0); width: 260px; }
 
-  .app-content { margin-left: 0; }
-
-  /* ── Fix sticky header stacking ── */
-  /* Mobile topbar is ~64px tall; sub-tab bar offsets to .subtab-bar class (set via App) */
-  .subtab-bar {
-    position: sticky !important;
-    top: 64px !important;   /* sit below the mobile topbar */
-    z-index: 55;
+  /* === Mobile topbar: ultra compact 48px === */
+  .mobile-topbar {
+    padding: 8px 12px !important;
+    flex-shrink: 0;
   }
 
-  /* Page header: NOT sticky on mobile — just scrolls away naturally */
+  .mobile-menu-btn {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 1rem !important;
+    flex-shrink: 0;
+  }
+
+  /* === Subtab bar: compact icon+text === */
+  .subtab-bar {
+    position: relative !important;
+    top: auto !important;
+    padding: 6px 10px !important;
+    flex-shrink: 0;
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+  }
+
+  .subtab-bar .tabs {
+    flex: 1;
+    max-width: none !important;
+  }
+
+  .subtab-bar .tab-btn {
+    padding: 5px 8px !important;
+    font-size: 0.72rem !important;
+    white-space: nowrap;
+  }
+
+  .subtab-bar .btn-sm {
+    padding: 5px 8px !important;
+    font-size: 0.72rem !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* === Page header: single compact row === */
   .page-header {
     position: relative !important;
     top: auto !important;
-    padding: var(--space-sm) var(--space-md);
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-sm);
+    padding: 6px 12px !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
     backdrop-filter: none;
+    flex-shrink: 0;
+    min-height: 0;
+  }
+
+  .page-header-info {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .page-header-badge {
+    display: none !important;
+  }
+
+  .page-header-title {
+    font-size: 0.9rem !important;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+  }
+
+  .page-header-sub {
+    font-size: 0.68rem !important;
+    margin-top: 0 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .page-header-actions {
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 2px;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 6px;
+    overflow-x: visible;
+    padding-bottom: 0;
   }
 
-  .page-header-title { font-size: 1.1rem; }
-  .page-header-sub   { font-size: 0.78rem; }
+  .page-header-actions .tabs {
+    background: transparent;
+    padding: 0;
+    gap: 4px;
+  }
 
+  .page-header-actions .tab-btn {
+    padding: 4px 8px !important;
+    font-size: 0.7rem !important;
+  }
+
+  .page-header-actions .btn {
+    padding: 4px 8px !important;
+    font-size: 0.7rem !important;
+  }
+
+  .page-header-actions .btn-sm {
+    padding: 3px 6px !important;
+    font-size: 0.68rem !important;
+  }
+
+  /* quiz score in header */
+  .quiz-score {
+    font-size: 0.72rem !important;
+    gap: 4px !important;
+    padding: 3px 8px !important;
+  }
+  .quiz-score-num { font-size: 0.9rem !important; }
+
+  /* === Progress bar: thinner === */
+  .progress-section {
+    padding: 4px 12px !important;
+    flex-shrink: 0;
+  }
+
+  .progress-track { height: 4px !important; }
+  .progress-label { font-size: 0.65rem !important; margin-bottom: 2px !important; }
+  .progress-pct   { font-size: 0.65rem !important; }
+
+  /* === Study area: fill remaining height, no scroll === */
   .study-area {
-    padding: var(--space-md) var(--space-md);
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    padding: 8px 12px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .home-hero { padding: var(--space-xl) var(--space-md); }
+  /* === Flashcard: fill available width and height === */
+  .flashcard-scene {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    align-self: stretch;
+    flex: none;
+  }
+
+  .flashcard-container {
+    aspect-ratio: unset !important;
+    height: 220px;
+  }
+
+  .flashcard-face {
+    padding: 12px !important;
+  }
+
+  .flashcard-hint {
+    font-size: 0.65rem !important;
+    bottom: 6px !important;
+  }
+
+  /* Smaller japanese text in flashcard on mobile */
+  .jp-text--normal { font-size: clamp(2rem, 12vw, 3rem) !important; }
+  ruby.furigana--normal { font-size: clamp(2rem, 12vw, 3rem) !important; }
+
+  .flashcard-burmese { font-size: clamp(1rem, 5vw, 1.4rem) !important; }
+
+  .flashcard-example {
+    padding: 6px 10px !important;
+    max-width: 100% !important;
+  }
+  .flashcard-example-jp { font-size: 0.8rem !important; }
+  .flashcard-example-mm { font-size: 0.72rem !important; }
+
+  /* === Card controls: compact === */
+  .card-controls {
+    padding: 4px 0 !important;
+    gap: 12px !important;
+    flex-shrink: 0;
+  }
+
+  .card-nav-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1rem !important;
+  }
+
+  .card-counter { font-size: 0.75rem !important; min-width: 60px !important; }
+  .card-counter span { font-size: 0.9rem !important; }
+
+  /* Keyboard hint: hide on mobile */
+  .card-keyboard-hint { display: none !important; }
+
+  /* === Learned button: compact === */
+  .learned-btn {
+    padding: 6px 14px !important;
+    font-size: 0.75rem !important;
+    flex-shrink: 0;
+  }
+
+  /* === Quiz options: single column, smaller === */
+  .quiz-options {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    flex: 1;
+  }
+
+  .quiz-option {
+    padding: 10px 8px !important;
+    font-size: 0.78rem !important;
+  }
+
+  .quiz-question {
+    padding: 10px 16px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .quiz-question-text {
+    font-size: 1.6rem !important;
+    margin: 4px 0 !important;
+  }
+
+  /* === Grammar cards: scrollable within study-area === */
+  .grammar-card {
+    padding: 12px !important;
+  }
+
+  .grammar-card-header { padding: 12px !important; }
+  .grammar-pattern { font-size: 1rem !important; }
+  .grammar-meaning { font-size: 0.78rem !important; }
+  .grammar-card-body { padding: 10px 12px !important; gap: 8px !important; }
+  .grammar-structure-text { font-size: 0.82rem !important; }
+  .grammar-example-jp { font-size: 0.82rem !important; }
+  .grammar-example-mm { font-size: 0.75rem !important; }
+  .grammar-notes-text { font-size: 0.75rem !important; }
+
+  /* === Home page === */
+  .home-hero { padding: var(--space-lg) var(--space-md); }
   .home-lessons-grid { padding: var(--space-md); grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
 
-  .quiz-options { grid-template-columns: 1fr; }
-
-  /* Compact progress section on mobile */
-  .progress-section { padding: var(--space-sm) var(--space-md); }
-
-  /* Sequential study dots – wrap nicely */
+  /* === Compact progress section === */
   .sequential-step-dots { gap: 4px; padding: 0 var(--space-md) var(--space-sm); }
   .sequential-step-dot  { width: 24px; height: 24px; font-size: 0.6rem; }
 
@@ -1536,4 +1757,11 @@ ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Mobile grammar: allow internal scroll within study-area */
+@media (max-width: 768px) {
+  .grammar-study-area {
+    overflow-y: auto !important;
+  }
 }

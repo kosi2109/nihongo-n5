@@ -12,7 +12,7 @@ function getOptions(correctCard, allCards, count = 4) {
   return shuffleArray([correctCard, ...shuffled]);
 }
 
-export default function QuizCard({ card, allCards, onNext, total, current }) {
+export default function QuizCard({ card, allCards, onNext, total, current, mode = 'jp-to-mm' }) {
   const [options, setOptions] = useState([]);
   const [selected, setSelected] = useState(null);
   const [answered, setAnswered] = useState(false);
@@ -39,6 +39,10 @@ export default function QuizCard({ card, allCards, onNext, total, current }) {
     return 'quiz-option';
   };
 
+  // jp-to-mm: show Japanese, guess Burmese
+  // mm-to-jp: show Burmese, guess Japanese
+  const isJpToMm = mode === 'jp-to-mm';
+
   return (
     <motion.div
       key={card.id}
@@ -51,12 +55,18 @@ export default function QuizCard({ card, allCards, onNext, total, current }) {
         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
           {current} / {total}
         </div>
-        {/* Furigana display on quiz question */}
+        {/* Question display */}
         <div className="quiz-question-text">
-          <Furigana text={card.japanese} reading={card.reading} size="normal" />
+          {isJpToMm ? (
+            <Furigana text={card.japanese} reading={card.reading} size="normal" />
+          ) : (
+            <span style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--text-primary)', lineHeight: 1.3 }}>
+              {card.burmese}
+            </span>
+          )}
         </div>
         <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '8px' }}>
-          မြန်မာဘာသာဖြင့် ဘာကိုဆိုလိုသနည်း?
+          {isJpToMm ? 'မြန်မာဘာသာဖြင့် ဘာကိုဆိုလိုသနည်း?' : 'ဂျပန်ဘာသာဖြင့် ဘာမည်သနည်း?'}
         </div>
       </div>
 
@@ -68,7 +78,11 @@ export default function QuizCard({ card, allCards, onNext, total, current }) {
             onClick={() => handleSelect(opt)}
             disabled={answered}
           >
-            {opt.burmese}
+            {isJpToMm ? (
+              opt.burmese
+            ) : (
+              <Furigana text={opt.japanese} reading={opt.reading} size="small" />
+            )}
           </button>
         ))}
       </div>

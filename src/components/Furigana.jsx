@@ -30,13 +30,42 @@ export default function Furigana({ text, reading, size = 'normal' }) {
  * Renders a Japanese sentence where we show furigana above all
  * kanji words. Splits the sentence and applies ruby to any word
  * that has a known furigana mapping.
+ *
+ * @param {string} text - The Japanese sentence
+ * @param {Object} furiganaMap - Map of { kanji: reading } e.g. { "学生": "がくせい" }
+ * @param {string} size - 'small' | 'normal'
  */
-export function FuriganaText({ text, size = 'normal' }) {
+export function FuriganaText({ text, furiganaMap = {}, size = 'normal' }) {
   if (!text) return null;
+
   const hasKanji = /[\u4e00-\u9faf\u3400-\u4dbf]/.test(text);
-  if (!hasKanji) {
+  if (!hasKanji || Object.keys(furiganaMap).length === 0) {
     return <span className={`jp-text jp-text--${size}`}>{text}</span>;
   }
-  // For sentences without explicit reading map, just show text
-  return <span className={`jp-text jp-text--${size}`}>{text}</span>;
+
+  // Sort keys longest-first so multi-kanji words match before single kanji
+  const keys = Object.keys(furiganaMap).sort((a, b) => b.length - a.length);
+
+  // Build regex that matches any of the known kanji words
+  const escaped = keys.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const regex = new RegExp(`(${escaped.join('|')})`, 'g');
+
+  const parts = text.split(regex);
+
+  return (
+    <span className={`jp-text jp-text--${size}`}>
+      {parts.map((part, i) => {
+        const reading = furiganaMap[part];
+        if (reading) {
+          return (
+            <ruby key={i} className={`furigana furigana--${size}`}>
+              {part}
+              <rt className="furigana-rt">{reading}</rt>
+            </ruby>
+          );
+        }
+        return <span key={i}>{part}</span>;
+      })}
+    </span>
+  );
 }
