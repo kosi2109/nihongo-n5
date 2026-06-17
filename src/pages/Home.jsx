@@ -1,5 +1,5 @@
-import { vocabulary, getLessonVocab } from '../data/vocabulary';
-import { grammar, getLessonGrammar } from '../data/grammar';
+import { useNavigate } from 'react-router-dom';
+import { metadata } from '../data/metadata';
 import { useProgress } from '../hooks/useProgress';
 
 const LESSONS = Array.from({ length: 25 }, (_, i) => i + 1);
@@ -12,17 +12,27 @@ const LESSON_TOPICS = {
   21: 'Conditional', 22: 'ပြောင်းလဲမှု', 23: 'ပေးကမ်းခြင်း', 24: 'ကိုးကားခြင်း', 25: 'ပြန်လည်ကြည့်ရှုခြင်း'
 };
 
-export default function Home({ onSelectLesson, onSelectMode = () => {} }) {
-  const { getLessonProgress } = useProgress();
+export default function Home() {
+  const { getLessonProgress, getOverallProgress } = useProgress();
+  const navigate = useNavigate();
 
-  const totalVocab = vocabulary.length;
-  const totalGrammar = grammar.length;
-  const totalCards = totalVocab + totalGrammar;
+  const handleSelectMode = (mode) => {
+    if (mode === 'sequential') {
+      navigate('/sequential');
+    } else {
+      document.querySelector('.home-lessons-grid')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-  const allVocabProg = getLessonProgress(vocabulary, 'vocab');
-  const allGramProg = getLessonProgress(grammar, 'grammar');
-  const totalLearned = allVocabProg.learned + allGramProg.learned;
-  const overallPercent = Math.round((totalLearned / totalCards) * 100);
+  const { learned: totalLearned, total: totalCards, percent: overallPercent } = getOverallProgress();
+  let totalVocab = 0;
+  let totalGrammar = 0;
+  for (let i = 1; i <= 25; i++) {
+    if (metadata[i]) {
+      totalVocab += metadata[i].vocabCount || 0;
+      totalGrammar += metadata[i].grammarCount || 0;
+    }
+  }
 
   return (
     <div className="animate-fade-in">
@@ -76,10 +86,10 @@ export default function Home({ onSelectLesson, onSelectMode = () => {} }) {
           {/* Sequential Mode */}
           <div
             className="mode-card mode-card--sequential"
-            onClick={() => onSelectMode('sequential')}
+            onClick={() => handleSelectMode('sequential')}
             role="button"
             tabIndex={0}
-            onKeyDown={e => e.key === 'Enter' && onSelectMode('sequential')}
+            onKeyDown={e => e.key === 'Enter' && handleSelectMode('sequential')}
             id="mode-sequential"
           >
             <span className="mode-card-badge" style={{ background: 'rgba(245,200,66,0.15)', color: 'var(--accent-gold)', border: '1px solid rgba(245,200,66,0.3)' }}>
@@ -95,10 +105,10 @@ export default function Home({ onSelectLesson, onSelectMode = () => {} }) {
           {/* Browse Mode */}
           <div
             className="mode-card mode-card--browse"
-            onClick={() => onSelectMode('browse')}
+            onClick={() => handleSelectMode('browse')}
             role="button"
             tabIndex={0}
-            onKeyDown={e => e.key === 'Enter' && onSelectMode('browse')}
+            onKeyDown={e => e.key === 'Enter' && handleSelectMode('browse')}
             id="mode-browse"
           >
             <span className="mode-card-icon">📚</span>
@@ -120,28 +130,24 @@ export default function Home({ onSelectLesson, onSelectMode = () => {} }) {
 
       <div className="home-lessons-grid">
         {LESSONS.map(lesson => {
-          const vocabCards = getLessonVocab(lesson);
-          const grammarCards = getLessonGrammar(lesson);
-          const vocabProg = getLessonProgress(vocabCards, 'vocab');
-          const gramProg = getLessonProgress(grammarCards, 'grammar');
-          const totalLearned = vocabProg.learned + gramProg.learned;
-          const totalCards = vocabProg.total + gramProg.total;
-          const percent = totalCards > 0 ? Math.round((totalLearned / totalCards) * 100) : 0;
+          const vocabCount = metadata[lesson]?.vocabCount || 0;
+          const grammarCount = metadata[lesson]?.grammarCount || 0;
+          const { learned: totalLearned, total: totalCards, percent } = getLessonProgress(lesson, 'any');
 
           return (
             <div
               key={lesson}
               className="lesson-card"
-              onClick={() => onSelectLesson(lesson)}
+              onClick={() => navigate(`/lesson/${lesson}/vocab`)}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && onSelectLesson(lesson)}
+              onKeyDown={(e) => e.key === 'Enter' && navigate(`/lesson/${lesson}/vocab`)}
               id={`lesson-card-${lesson}`}
             >
               <div className="lesson-card-num">သင်ခန်းစာ {lesson}</div>
               <div className="lesson-card-title">{LESSON_TOPICS[lesson]}</div>
               <div className="lesson-card-count">
-                {vocabCards.length} ဝေါဟာရ • {grammarCards.length} သဒ္ဒါ
+                {vocabCount} ဝေါဟာရ • {grammarCount} သဒ္ဒါ
               </div>
               <div className="lesson-card-progress">
                 <div className="lesson-card-progress-fill" style={{ width: `${percent}%` }} />

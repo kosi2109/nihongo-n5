@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getLessonGrammar } from '../data/grammar';
+import { useLessonData } from '../hooks/useLessonData';
 import ProgressBar from '../components/ProgressBar';
 import { useProgress } from '../hooks/useProgress';
-import Furigana from '../components/Furigana';
-
+import Furigana, { FuriganaText } from '../components/Furigana';
+import { FURIGANA_MAP } from '../data/furiganaMap';
 
 const LESSON_TOPICS = {
   1: 'မိတ်ဆက်ခြင်း', 2: 'ပစ္စည်းများ', 3: 'နေရာများ', 4: 'အချိန်', 5: 'သွားလာရေး',
@@ -13,6 +13,63 @@ const LESSON_TOPICS = {
   16: 'တပြိုင်နက်/ကာလ', 17: 'အတွေ့အကြုံ', 18: 'ခန့်မှန်း/ထင်မြင်ချက်', 19: 'နည်းလမ်းများ', 20: 'ကြားသိမှု',
   21: 'Conditional', 22: 'ပြောင်းလဲမှု', 23: 'ပေးကမ်းခြင်း', 24: 'ကိုးကားခြင်း', 25: 'ပြန်လည်ကြည့်ရှုခြင်း'
 };
+
+function ExamplesSection({ examples }) {
+  const [open, setOpen] = useState(true);
+  return (
+    <div style={{
+      background: 'rgba(74,144,217,0.04)',
+      border: '1px solid rgba(74,144,217,0.15)',
+      borderRadius: 'var(--radius-lg)',
+      overflow: 'hidden',
+    }}>
+      {/* Header toggle */}
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{
+          width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '10px 14px', background: 'transparent', border: 'none', cursor: 'pointer',
+          color: 'var(--accent-blue)', fontFamily: 'var(--font-ui)',
+        }}
+      >
+        <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+          📖 ဥပမာ ဝါကျများ ({examples.length})
+        </span>
+        <span style={{ fontSize: '0.8rem', opacity: 0.7, transition: 'transform 0.2s', display: 'inline-block', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
+      </button>
+
+      {open && (
+        <div style={{ padding: '0 14px 14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          {examples.map((ex, i) => (
+            <div key={i} style={{
+              background: 'var(--bg-card)',
+              borderRadius: 'var(--radius-md)',
+              padding: '10px 12px',
+              borderLeft: '3px solid var(--accent-blue)',
+            }}>
+              {/* Number badge */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                <span style={{
+                  flexShrink: 0, width: '20px', height: '20px', borderRadius: '50%',
+                  background: 'rgba(74,144,217,0.18)', display: 'flex', alignItems: 'center',
+                  justifyContent: 'center', fontSize: '0.65rem', fontWeight: 700, color: 'var(--accent-blue)',
+                }}>{i + 1}</span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div className="grammar-example-jp" style={{ marginBottom: '4px' }}>
+                    <FuriganaText text={ex.jp} furiganaMap={FURIGANA_MAP} size="small" />
+                  </div>
+                  <div className="grammar-example-mm" style={{ color: 'var(--text-secondary)' }}>
+                    {ex.mm}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function GrammarCardDisplay({ card, type = 'grammar' }) {
   const { isLearned, toggleLearned } = useProgress();
@@ -42,12 +99,19 @@ function GrammarCardDisplay({ card, type = 'grammar' }) {
           <div className="grammar-structure-text">{card.structure}</div>
         </div>
 
-        {/* Example */}
+        {/* Single main example */}
         <div className="grammar-example-box">
-          <div className="grammar-structure-label" style={{ color: 'var(--accent-blue)' }}>ဥပမာ</div>
-          <div className="grammar-example-jp">🇯🇵 {card.example_jp}</div>
+          <div className="grammar-structure-label" style={{ color: 'var(--accent-blue)' }}>ဥပမာ (ပင်မ)</div>
+          <div className="grammar-example-jp">
+            🇯🇵 <FuriganaText text={card.example_jp} furiganaMap={FURIGANA_MAP} size="small" />
+          </div>
           <div className="grammar-example-mm">🇲🇲 {card.example_mm}</div>
         </div>
+
+        {/* Additional examples array */}
+        {card.examples && card.examples.length > 0 && (
+          <ExamplesSection examples={card.examples} />
+        )}
 
         {/* Notes */}
         {card.notes_mm && (
@@ -75,13 +139,27 @@ function GrammarCardDisplay({ card, type = 'grammar' }) {
 }
 
 export default function GrammarStudy({ lesson }) {
-  const cards = getLessonGrammar(lesson);
+  const { data: originalCards, loading } = useLessonData(lesson, 'grammar');
+  const [grammarCards, setGrammarCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { resetLesson } = useProgress();
+  const { isLearned, toggleLearned, resetLesson } = useProgress();
 
-  const currentCard = cards[currentIndex];
+  useEffect(() => {
+    setGrammarCards(originalCards);
+    setCurrentIndex(0);
+  }, [originalCards]);
 
-  if (!cards.length) {
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        <div style={{ color: 'var(--text-muted)' }}>Loading Grammar Data...</div>
+      </div>
+    );
+  }
+
+  const currentGrammar = grammarCards[currentIndex];
+
+  if (!grammarCards.length) {
     return (
       <div className="animate-fade-in">
         <div className="page-header">
@@ -101,7 +179,7 @@ export default function GrammarStudy({ lesson }) {
   }
 
   return (
-    <div className="animate-fade-in">
+    <div className="animate-fade-in" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div className="page-header">
         <div className="page-header-info">

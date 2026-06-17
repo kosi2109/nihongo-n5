@@ -1,0 +1,222 @@
+export const vocab = [
+  {
+    "id": 1,
+    "lesson": 1,
+    "japanese": "わたし",
+    "reading": "わたし",
+    "romaji": "watashi",
+    "burmese": "ကျွန်တော်/ကျွန်မ (ငါ)",
+    "type": "pronoun",
+    "example_jp": "わたしは学生です。",
+    "example_mm": "ကျွန်တော်/ကျွန်မ ကျောင်းသားဖြစ်သည်။"
+  },
+  {
+    "id": 2,
+    "lesson": 1,
+    "japanese": "あなた",
+    "reading": "あなた",
+    "romaji": "anata",
+    "burmese": "သင် (ခင်ဗျား/ရှင်)",
+    "type": "pronoun",
+    "example_jp": "あなたは先生ですか。",
+    "example_mm": "သင်သည် ဆရာ/ဆရာမ ဖြစ်သလား?"
+  },
+  {
+    "id": 3,
+    "lesson": 1,
+    "japanese": "かれ",
+    "reading": "かれ",
+    "romaji": "kare",
+    "burmese": "သူ (ယောကျ်ားလေး)",
+    "type": "pronoun",
+    "example_jp": "かれは学生です。",
+    "example_mm": "သူသည် ကျောင်းသားဖြစ်သည်။"
+  },
+  {
+    "id": 4,
+    "lesson": 1,
+    "japanese": "かのじょ",
+    "reading": "かのじょ",
+    "romaji": "kanojo",
+    "burmese": "သူမ (မိန်းကလေး)",
+    "type": "pronoun",
+    "example_jp": "かのじょは先生です。",
+    "example_mm": "သူမသည် ဆရာမဖြစ်သည်။"
+  },
+  {
+    "id": 5,
+    "lesson": 1,
+    "japanese": "みなさん",
+    "reading": "みなさん",
+    "romaji": "minasan",
+    "burmese": "အားလုံး၊ ခင်ဗျားတို့",
+    "type": "noun",
+    "example_jp": "みなさん、おはようございます。",
+    "example_mm": "အားလုံး မင်္ဂလာနံနက်ခင်း။"
+  },
+  {
+    "id": 6,
+    "lesson": 1,
+    "japanese": "〜さん",
+    "reading": "〜さん",
+    "romaji": "~san",
+    "burmese": "ဦး/ဒေါ်/ကိုကို/မမ (ရိုသေစကား)",
+    "type": "suffix",
+    "example_jp": "ミラーさんはアメリカ人です。",
+    "example_mm": "မစ္စတာမိုင်လာသည် အမေရိကန်ဖြစ်သည်။"
+  },
+  {
+    "id": 7,
+    "lesson": 1,
+    "japanese": "〜くん",
+    "reading": "〜くん",
+    "romaji": "~kun",
+    "burmese": "ကောင်လေး (အမည်နောက်တွင် တပ်)",
+    "type": "suffix",
+    "example_jp": "田中くんはどこですか。",
+    "example_mm": "တာနကာကောင်လေး ဘယ်မှာလဲ?"
+  },
+  {
+    "id": 8,
+    "lesson": 1,
+    "japanese": "〜ちゃん",
+    "reading": "〜ちゃん",
+    "romaji": "~chan",
+    "burmese": "သူငယ်ချင်း (ကလေး/ပြေးသူများအတွက်)",
+    "type": "suffix",
+    "example_jp": "さくらちゃんはかわいいです。",
+    "example_mm": "ဆာကူရာချဉ်ချဉ်သည် ချစ်စရာကောင်းသည်။"
+  },
+  {
+    "id": 9,
+    "lesson": 1,
+    "japanese": "先生",
+    "reading": "せんせい",
+    "romaji": "sensei",
+    "burmese": "ဆရာ/ဆရာမ",
+    "type": "noun",
+    "example_jp": "先生はやさしいです。",
+    "example_mm": "ဆရာသည် ကြင်နာသည်။"
+  },
+  {
+    "id": 10,
+    "lesson": 1,
+    "japanese": "学生",
+    "reading": "がくせい",
+    "romaji": "gakusei",
+    "burmese": "ကျောင်းသား/ကျောင်းသူ",
+    "type": "noun",
+    "example_jp": "わたしは学生です。",
+    "example_mm": "ကျွန်တော်/ကျွန်မသည် ကျောင်းသားဖြစ်သည်။"
+  },
+  {
+    "id": 11,
+    "lesson": 1,
+    "japanese": "会社員",
+    "reading": "かいしゃいん",
+    "romaji": "kaishain",
+    "burmese": "ကုမ္ပဏီဝန်ထမ်း",
+    "type": "noun",
+    "example_jp": "父は会社員です。",
+    "example_mm": "အဖေသည် ကုမ္ပဏီဝန်ထမ်းဖြစ်သည်။"
+  },
+  {
+    "id": 12,
+    "lesson": 1,
+    "japanese": "医者",
+    "reading": "いしゃ",
+    "romaji": "isha",
+    "burmese": "ဆရာဝန်",
+    "type": "noun",
+    "example_jp": "かれは医者です。",
+    "example_mm": "သူသည် ဆရာဝန်ဖြစ်သည်။"
+  },
+  {
+    "id": 13,
+    "lesson": 1,
+    "japanese": "研究者",
+    "reading": "けんきゅうしゃ",
+    "romaji": "kenkyusha",
+    "burmese": "သုတေသီ",
+    "type": "noun",
+    "example_jp": "かのじょは研究者です。",
+    "example_mm": "သူမသည် သုတေသီဖြစ်သည်။"
+  },
+  {
+    "id": 14,
+    "lesson": 1,
+    "japanese": "エンジニア",
+    "reading": "エンジニア",
+    "romaji": "enjinia",
+    "burmese": "အင်ဂျင်နီယာ",
+    "type": "noun",
+    "example_jp": "わたしはエンジニアです。",
+    "example_mm": "ကျွန်တော်/ကျွန်မသည် အင်ဂျင်နီယာဖြစ်သည်။"
+  },
+  {
+    "id": 15,
+    "lesson": 1,
+    "japanese": "大学",
+    "reading": "だいがく",
+    "romaji": "daigaku",
+    "burmese": "တက္ကသိုလ်",
+    "type": "noun",
+    "example_jp": "わたしは大学生です。",
+    "example_mm": "ကျွန်တော်/ကျွန်မသည် တက္ကသိုလ်ကျောင်းသားဖြစ်သည်။"
+  },
+  {
+    "id": 16,
+    "lesson": 1,
+    "japanese": "日本語",
+    "reading": "にほんご",
+    "romaji": "nihongo",
+    "burmese": "ဂျပန်ဘာသာ",
+    "type": "noun",
+    "example_jp": "日本語を勉強します。",
+    "example_mm": "ဂျပန်ဘာသာကို လေ့လာသည်။"
+  },
+  {
+    "id": 17,
+    "lesson": 1,
+    "japanese": "はい",
+    "reading": "はい",
+    "romaji": "hai",
+    "burmese": "ဟုတ်ကဲ့ (Yes)",
+    "type": "expression",
+    "example_jp": "はい、そうです。",
+    "example_mm": "ဟုတ်ကဲ့၊ ဟုတ်ပါသည်။"
+  },
+  {
+    "id": 18,
+    "lesson": 1,
+    "japanese": "いいえ",
+    "reading": "いいえ",
+    "romaji": "iie",
+    "burmese": "မဟုတ်ပါ (No)",
+    "type": "expression",
+    "example_jp": "いいえ、ちがいます。",
+    "example_mm": "မဟုတ်ပါ၊ ကွာခြားသည်။"
+  },
+  {
+    "id": 19,
+    "lesson": 1,
+    "japanese": "何",
+    "reading": "なん/なに",
+    "romaji": "nan/nani",
+    "burmese": "ဘာ",
+    "type": "question",
+    "example_jp": "これは何ですか。",
+    "example_mm": "ဒါ ဘာလဲ?"
+  },
+  {
+    "id": 20,
+    "lesson": 1,
+    "japanese": "何歳",
+    "reading": "なんさい",
+    "romaji": "nansai",
+    "burmese": "အသက်ဘယ်နှစ်နှစ်",
+    "type": "question",
+    "example_jp": "何歳ですか。",
+    "example_mm": "အသက်ဘယ်နှစ်နှစ်ရှိပြီလဲ?"
+  }
+];

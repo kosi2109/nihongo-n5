@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getLessonVocab } from '../data/vocabulary';
+import { useLessonData } from '../hooks/useLessonData';
 import FlashCard from '../components/FlashCard';
 import ProgressBar from '../components/ProgressBar';
 import { useProgress } from '../hooks/useProgress';
@@ -18,12 +18,26 @@ const LESSON_TOPICS = {
 };
 
 export default function VocabStudy({ lesson }) {
-  const originalCards = getLessonVocab(lesson);
-  const [cards, setCards] = useState(originalCards);
+  const { data: originalCards, loading } = useLessonData(lesson, 'vocab');
+  const [cards, setCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isShuffled, setIsShuffled] = useState(false);
   const [filterMode, setFilterMode] = useState('all'); // 'all' | 'unlearned'
   const { isLearned, resetLesson } = useProgress();
+
+  useEffect(() => {
+    setCards(originalCards);
+    setCurrentIndex(0);
+    setIsShuffled(false);
+  }, [originalCards]);
+
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        <div style={{ color: 'var(--text-muted)' }}>Loading Vocab Data...</div>
+      </div>
+    );
+  }
 
   const filteredCards = filterMode === 'unlearned'
     ? cards.filter(c => !isLearned(c.id, 'vocab'))
@@ -71,7 +85,7 @@ export default function VocabStudy({ lesson }) {
   };
 
   return (
-    <div className="animate-fade-in" onKeyDown={handleKeyDown} tabIndex={-1} style={{ outline: 'none' }}>
+    <div className="animate-fade-in" onKeyDown={handleKeyDown} tabIndex={-1} style={{ outline: 'none', height: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div className="page-header">
         <div className="page-header-info">
@@ -163,7 +177,7 @@ export default function VocabStudy({ lesson }) {
             </div>
 
             {/* Keyboard hint */}
-            <div style={{ textAlign: 'center', fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '-8px' }}>
+            <div className="card-keyboard-hint" style={{ textAlign: 'center', fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '-8px' }}>
               ← → မြှားခလုတ်များဖြင့် လှန်ကြည့်နိုင်သည်
             </div>
           </>

@@ -1,10 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { vocabulary, getLessonVocab } from '../data/vocabulary';
-import { grammar, getLessonGrammar } from '../data/grammar';
+import { useLessonData } from '../hooks/useLessonData';
 import FlashCard from '../components/FlashCard';
 import { useProgress } from '../hooks/useProgress';
 import Furigana from '../components/Furigana';
+import { metadata } from '../data/metadata';
 
 const TOTAL_LESSONS = 25;
 
@@ -71,10 +71,21 @@ export default function SequentialStudy() {
   const [subTab, setSubTab] = useState('vocab'); // 'vocab' | 'grammar'
   const [cardIndex, setCardIndex] = useState(0);
   const [lessonDone, setLessonDone] = useState(false);
-  const { getLessonProgress, isLearned } = useProgress();
+  const { getLessonProgress, isLearned, getOverallProgress } = useProgress();
 
-  const vocabCards = getLessonVocab(currentLesson);
-  const grammarCards = getLessonGrammar(currentLesson);
+  const { data: originalVocab, loading: loadingVocab } = useLessonData(currentLesson, 'vocab');
+  const { data: originalGrammar, loading: loadingGrammar } = useLessonData(currentLesson, 'grammar');
+
+  const [vocabCards, setVocabCards] = useState([]);
+  const [grammarCards, setGrammarCards] = useState([]);
+
+  useEffect(() => {
+    setVocabCards(originalVocab);
+  }, [originalVocab]);
+
+  useEffect(() => {
+    setGrammarCards(originalGrammar);
+  }, [originalGrammar]);
 
   const currentCards = subTab === 'vocab' ? vocabCards : grammarCards;
   const currentCard = currentCards[cardIndex];
@@ -83,14 +94,9 @@ export default function SequentialStudy() {
   // Progress for all 25 lessons (used for the dot indicators)
   const lessonStatuses = Array.from({ length: TOTAL_LESSONS }, (_, i) => {
     const l = i + 1;
-    const vCards = getLessonVocab(l);
-    const gCards = getLessonGrammar(l);
-    const vProg = getLessonProgress(vCards, 'vocab');
-    const gProg = getLessonProgress(gCards, 'grammar');
-    const total = vProg.total + gProg.total;
-    const learned = vProg.learned + gProg.learned;
-    if (total === 0) return 'done';
-    if (learned === total) return 'done';
+    const prog = getLessonProgress(l, 'any');
+    if (prog.total === 0) return 'done';
+    if (prog.learned === prog.total) return 'done';
     if (l < currentLesson) return 'done';
     if (l === currentLesson) return 'active';
     return 'pending';
@@ -135,17 +141,20 @@ export default function SequentialStudy() {
   };
 
   // Overall sequential progress
-  const totalCards = vocabulary.length + grammar.length;
-  const allVocabProg = getLessonProgress(vocabulary, 'vocab');
-  const allGramProg = getLessonProgress(grammar, 'grammar');
-  const totalLearned = allVocabProg.learned + allGramProg.learned;
-  const overallPercent = Math.round((totalLearned / totalCards) * 100);
+  const { learned: totalLearned, total: totalCards, percent: overallPercent } = getOverallProgress();
 
   // Current lesson progress
-  const vocabProg = getLessonProgress(vocabCards, 'vocab');
-  const gramProg = getLessonProgress(grammarCards, 'grammar');
-  const lessonTotal = vocabProg.total + gramProg.total;
-  const lessonLearned = vocabProg.learned + gramProg.learned;
+  const currentLessonProg = getLessonProgress(currentLesson, 'any');
+  const lessonTotal = currentLessonProg.total;
+  const lessonLearned = currentLessonProg.learned;
+
+  if (loadingVocab || loadingGrammar) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        <div style={{ color: 'var(--text-muted)' }}>Loading Lesson Data...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="animate-fade-in">

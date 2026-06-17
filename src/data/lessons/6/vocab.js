@@ -1,0 +1,222 @@
+export const vocab = [
+  {
+    "id": 96,
+    "lesson": 6,
+    "japanese": "食べる",
+    "reading": "たべる",
+    "romaji": "taberu",
+    "burmese": "စားသည်",
+    "type": "verb",
+    "example_jp": "ごはんを食べます。",
+    "example_mm": "ထမင်းစားသည်။"
+  },
+  {
+    "id": 97,
+    "lesson": 6,
+    "japanese": "飲む",
+    "reading": "のむ",
+    "romaji": "nomu",
+    "burmese": "သောက်သည်",
+    "type": "verb",
+    "example_jp": "水を飲みます。",
+    "example_mm": "ရေသောက်သည်။"
+  },
+  {
+    "id": 98,
+    "lesson": 6,
+    "japanese": "見る",
+    "reading": "みる",
+    "romaji": "miru",
+    "burmese": "ကြည့်သည်",
+    "type": "verb",
+    "example_jp": "テレビを見ます。",
+    "example_mm": "တီဗီကြည့်သည်။"
+  },
+  {
+    "id": 99,
+    "lesson": 6,
+    "japanese": "する",
+    "reading": "する",
+    "romaji": "suru",
+    "burmese": "လုပ်သည်",
+    "type": "verb",
+    "example_jp": "宿題をします。",
+    "example_mm": "အိမ်စာလုပ်သည်။"
+  },
+  {
+    "id": 100,
+    "lesson": 6,
+    "japanese": "聞く",
+    "reading": "きく",
+    "romaji": "kiku",
+    "burmese": "နားထောင်သည် / မေးသည်",
+    "type": "verb",
+    "example_jp": "音楽を聞きます。",
+    "example_mm": "သီချင်းနားထောင်သည်။"
+  },
+  {
+    "id": 101,
+    "lesson": 6,
+    "japanese": "読む",
+    "reading": "よむ",
+    "romaji": "yomu",
+    "burmese": "ဖတ်သည်",
+    "type": "verb",
+    "example_jp": "本を読みます。",
+    "example_mm": "စာအုပ်ဖတ်သည်။"
+  },
+  {
+    "id": 102,
+    "lesson": 6,
+    "japanese": "書く",
+    "reading": "かく",
+    "romaji": "kaku",
+    "burmese": "ရေးသည်",
+    "type": "verb",
+    "example_jp": "手紙を書きます。",
+    "example_mm": "စာ ရေးသည်။"
+  },
+  {
+    "id": 103,
+    "lesson": 6,
+    "japanese": "買う",
+    "reading": "かう",
+    "romaji": "kau",
+    "burmese": "ဝယ်သည်",
+    "type": "verb",
+    "example_jp": "本を買います。",
+    "example_mm": "စာအုပ်ဝယ်သည်။"
+  },
+  {
+    "id": 104,
+    "lesson": 6,
+    "japanese": "ごはん",
+    "reading": "ごはん",
+    "romaji": "gohan",
+    "burmese": "ထမင်း",
+    "type": "noun",
+    "example_jp": "ごはんを食べます。",
+    "example_mm": "ထမင်းစားသည်။"
+  },
+  {
+    "id": 105,
+    "lesson": 6,
+    "japanese": "パン",
+    "reading": "パン",
+    "romaji": "pan",
+    "burmese": "မုန့်ပေါင်း",
+    "type": "noun",
+    "example_jp": "朝はパンを食べます。",
+    "example_mm": "နံနက် မုန့်ပေါင်းစားသည်။"
+  },
+  {
+    "id": 106,
+    "lesson": 6,
+    "japanese": "たまご",
+    "reading": "たまご",
+    "romaji": "tamago",
+    "burmese": "ကြက်ဥ",
+    "type": "noun",
+    "example_jp": "たまごを食べます。",
+    "example_mm": "ကြက်ဥစားသည်။"
+  },
+  {
+    "id": 107,
+    "lesson": 6,
+    "japanese": "肉",
+    "reading": "にく",
+    "romaji": "niku",
+    "burmese": "အသား",
+    "type": "noun",
+    "example_jp": "肉が好きです。",
+    "example_mm": "အသားကို ကြိုက်သည်။"
+  },
+  {
+    "id": 108,
+    "lesson": 6,
+    "japanese": "魚",
+    "reading": "さかな",
+    "romaji": "sakana",
+    "burmese": "ငါး",
+    "type": "noun",
+    "example_jp": "魚を食べます。",
+    "example_mm": "ငါးစားသည်။"
+  },
+  {
+    "id": 109,
+    "lesson": 6,
+    "japanese": "野菜",
+    "reading": "やさい",
+    "romaji": "yasai",
+    "burmese": "ဟင်းသီးဟင်းရွက်",
+    "type": "noun",
+    "example_jp": "野菜が好きです。",
+    "example_mm": "ဟင်းသီးဟင်းရွက်ကို ကြိုက်သည်။"
+  },
+  {
+    "id": 110,
+    "lesson": 6,
+    "japanese": "くだもの",
+    "reading": "くだもの",
+    "romaji": "kudamono",
+    "burmese": "သစ်သီးဝလံ",
+    "type": "noun",
+    "example_jp": "くだものを食べます。",
+    "example_mm": "သစ်သီးဝလံစားသည်။"
+  },
+  {
+    "id": 111,
+    "lesson": 6,
+    "japanese": "水",
+    "reading": "みず",
+    "romaji": "mizu",
+    "burmese": "ရေ",
+    "type": "noun",
+    "example_jp": "水を飲みます。",
+    "example_mm": "ရေသောက်သည်။"
+  },
+  {
+    "id": 112,
+    "lesson": 6,
+    "japanese": "お茶",
+    "reading": "おちゃ",
+    "romaji": "ocha",
+    "burmese": "လက်ဖက်ရည်",
+    "type": "noun",
+    "example_jp": "お茶を飲みます。",
+    "example_mm": "လက်ဖက်ရည်သောက်သည်။"
+  },
+  {
+    "id": 113,
+    "lesson": 6,
+    "japanese": "コーヒー",
+    "reading": "コーヒー",
+    "romaji": "kohi",
+    "burmese": "ကော်ဖီ",
+    "type": "noun",
+    "example_jp": "コーヒーを飲みます。",
+    "example_mm": "ကော်ဖီသောက်သည်။"
+  },
+  {
+    "id": 114,
+    "lesson": 6,
+    "japanese": "ジュース",
+    "reading": "ジュース",
+    "romaji": "jusu",
+    "burmese": "သစ်သီးဖျော်ရည်",
+    "type": "noun",
+    "example_jp": "ジュースを飲みます。",
+    "example_mm": "သစ်သီးဖျော်ရည်သောက်သည်။"
+  },
+  {
+    "id": 115,
+    "lesson": 6,
+    "japanese": "ビール",
+    "reading": "ビール",
+    "romaji": "biru",
+    "burmese": "ဘီယာ",
+    "type": "noun",
+    "example_jp": "ビールを飲みます。",
+    "example_mm": "ဘီယာသောက်သည်။"
+  }
+];
