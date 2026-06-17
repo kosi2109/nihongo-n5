@@ -35,7 +35,7 @@ export default function Home() {
   }
 
   return (
-    <div className="animate-fade-in">
+    <div className="animate-fade-in" style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
       {/* Hero */}
       <div className="home-hero">
         <div className="home-hero-badge">🎌 JLPT N5 • မြန်မာဘာသာ</div>

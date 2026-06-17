@@ -181,7 +181,7 @@ export default function GrammarStudy({ lesson }) {
   }
 
   return (
-    <div className="animate-fade-in" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <div className="animate-fade-in" style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div className="page-header">
         <div className="page-header-info">

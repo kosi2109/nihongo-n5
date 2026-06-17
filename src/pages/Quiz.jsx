@@ -85,7 +85,7 @@ export default function Quiz({ lesson, onQuizStateChange }) {
   }
 
   return (
-    <div className="animate-fade-in" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <div className="animate-fade-in" style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
       <div className="page-header">
         <div className="page-header-info">
           <div className="page-header-badge">🎯 စစ်ဆေးချက် • သင်ခန်းစာ {lesson}</div>

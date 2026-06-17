@@ -157,7 +157,7 @@ export default function SequentialStudy() {
   }
 
   return (
-    <div className="animate-fade-in">
+    <div className="animate-fade-in" style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
       {/* Page Header */}
       <div className="page-header">
         <div className="page-header-info">
