@@ -175,10 +175,10 @@ ruby.furigana--xs {
   font-size: 0.9rem;
 }
 
-ruby.furigana--normal rt.furigana-rt { font-size: 0.3em; }
-ruby.furigana--medium rt.furigana-rt { font-size: 0.32em; }
-ruby.furigana--small rt.furigana-rt  { font-size: 0.6em; }
-ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
+ruby.furigana--normal rt.furigana-rt { font-size: 0.45em; }
+ruby.furigana--medium rt.furigana-rt { font-size: 0.45em; }
+ruby.furigana--small rt.furigana-rt  { font-size: 0.9em; }
+ruby.furigana--xs rt.furigana-rt     { font-size: 0.95em; }
 
 .jp-text {
   font-family: var(--font-jp);
@@ -701,6 +701,7 @@ ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
 .flashcard-container {
   width: 100%;
   aspect-ratio: 3/2;
+  display: grid;
   position: relative;
   transform-style: preserve-3d;
   transition: transform var(--transition-card);
@@ -712,8 +713,7 @@ ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
 }
 
 .flashcard-face {
-  position: absolute;
-  inset: 0;
+  grid-area: 1 / 1;
   border-radius: var(--radius-xl);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -855,17 +855,18 @@ ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
   text-align: left;
   width: 100%;
   max-width: 420px;
+  margin-top: 16px;
 }
 
 .flashcard-example-jp {
   font-family: var(--font-jp-sans);
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: var(--text-primary);
   margin-bottom: 4px;
 }
 
 .flashcard-example-mm {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--text-secondary);
 }
 
@@ -1623,7 +1624,8 @@ ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
 
   .flashcard-container {
     aspect-ratio: unset !important;
-    height: 220px;
+    min-height: 260px;
+    height: auto;
   }
 
   .flashcard-face {
@@ -1645,8 +1647,8 @@ ruby.furigana--xs rt.furigana-rt     { font-size: 0.65em; }
     padding: 6px 10px !important;
     max-width: 100% !important;
   }
-  .flashcard-example-jp { font-size: 0.8rem !important; }
-  .flashcard-example-mm { font-size: 0.72rem !important; }
+  .flashcard-example-jp { font-size: 1rem !important; }
+  .flashcard-example-mm { font-size: 0.9rem !important; }
 
   /* === Card controls: compact === */
   .card-controls {
